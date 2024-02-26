@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    <style>
+        body {
+            height: 2000px; /* Create a long page for scrolling */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            position: fixed; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            gap: 20px;
+            align-items: center;
+        }
+
+        .text {
+            font-size: 20px;
+            color: #333; /* Darker color */
+            z-index: 1; /* Ensure text is above the title */
+        }
+
+        .title {
+            font-size: 60px; /* Larger title */
+            color: #666; /* Lighter color */
+            z-index: -1; /* Place title below the text */
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <div class="text">Some Text Here</div>
+      <div class="title">The Title</div>
+    </div>
+
+    <script>
+        const text = document.querySelector('.text');
+        const title = document.querySelector('.title');
+        const containerWidth = document.querySelector('.container').clientWidth;
+
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+
+            // Text moves to the left
+            let textOffset = scrollPosition * 0.8;
+            text.style.transform = `translateX(-${textOffset + containerWidth / 2}px)`;
+
+            // Title moves to the left (with a delay)
+            let titleOffset = Math.max(1, scrollPosition  - containerWidth * 0.5) * 0.5;
+            title.style.transform = `translateX(-${titleOffset + containerWidth / 2}px)`; 
+        });
+    </script>
+</body>
+</html>

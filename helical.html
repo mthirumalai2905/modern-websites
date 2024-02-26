@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helical Square Animation (Flexbox)</title>
+    <style>
+        body {
+            display: flex;
+            min-height: 300vh; /* Create vertical space for multiple 'windows' */
+            margin: 0;
+            flex-direction: column; /* Arrange windows vertically */
+            overflow: hidden; /* Hide overflow to focus on animation within window */
+        }
+
+        .window {
+            flex: 1; /* Make each window fill equal space */
+            display: flex; /* Make each window a flex container */
+        }
+
+        .square {
+            position: absolute; /* Position relative to window */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #f00;
+        }
+
+        .flex-start { 
+            justify-content: flex-start;
+            align-items: flex-start; 
+        }
+
+        .flex-end {
+            justify-content: flex-end;
+            align-items: flex-start; 
+        }
+    </style>
+</head>
+<body>
+    <div class="window flex-start">
+        <div class="square"></div> 
+    </div>
+    <div class="window"> </div> 
+    <div class="window"> </div> 
+
+    <script>
+        const square = document.querySelector('.square');
+        const windows = document.querySelectorAll('.window');
+        let currentWindow = 0;
+        let windowHeight = window.innerHeight; // Get window height
+
+        function moveSquare() {
+            if (currentWindow >= windows.length) return; // Stop when at the last window
+
+            // Remove existing flex classes
+            windows[currentWindow].classList.remove('flex-start', 'flex-end');
+
+            // Alternate flex-end, flex-start on successive windows
+            const newFlexClass = currentWindow % 2 === 0 ? 'flex-end' : 'flex-start';
+            windows[currentWindow].classList.add(newFlexClass);
+
+            // Calculate rotation based on scroll position relative to window height
+            const rotation = (window.scrollY + currentWindow * windowHeight) / windowHeight * Math.PI;
+
+            // Calculate vertical movement based on scroll position within current window
+            const verticalMovement = (window.scrollY % windowHeight) * 0.2; // Adjust multiplier for vertical movement speed
+
+            // Apply transformations for rotation and vertical movement relative to the window
+            square.style.transform = `rotate(${rotation}rad) translateY(${verticalMovement}px)`;
+
+            // Move to the next window when reaching the bottom of current window
+            if (window.scrollY % windowHeight >= windowHeight - 50) { // Adjust threshold based on square size
+                currentWindow++;
+            }
+        }
+
+        window.addEventListener('scroll', moveSquare);
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    <style>
+        body {
+            height: 2000px; /* Create a long page for scrolling */
+            margin: 0;
+        }
+
+        .marquee-container {
+            position: fixed;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap; 
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee">
+            This text scrolls to the left on scroll! Add more text here for a longer marquee.
+        </div>
+    </div>
+
+    <script>
+        const marquee = document.querySelector('.marquee');
+
+        window.addEventListener('scroll', function() {
+            // Calculate a translation based on scroll position
+            const scrollPosition = window.scrollY;
+            const translation = scrollPosition * 0.5; // Adjust multiplier to change scroll speed
+
+            // Apply smooth left transform to the marquee
+            marquee.style.transform = `translateX(-${translation}px)`;
+        });
+    </script>
+</body>
+</html>

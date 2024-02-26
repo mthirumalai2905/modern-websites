@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax Website</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+
+  .first-page {
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+  }
+
+  .parallax-section {
+    background-color: #ddd;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+  }
+
+  .content {
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="first-page">
+  <div class="content">
+    <h2>Welcome to the Parallax Website</h2>
+    <p>This is the first page. It has a black background with white text. Scroll down to experience the parallax effect.</p>
+  </div>
+</div>
+
+<div class="parallax-section" style="background-image: url('https://images.unsplash.com/photo-1708876954270-8fad10609e53?q=80&w=1834&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" data-speed="0.5">
+  <div class="content">
+    <h2>Parallax Section</h2>
+    <p>This is the parallax section. As you scroll, notice how the background image moves at a different speed compared to the content, creating a parallax effect.</p>
+    <p>Feel free to add more content and customize the styling to suit your needs!</p>
+  </div>
+</div>
+
+<div class="parallax-section" style="background-image: url('https://images.unsplash.com/photo-1707343848655-a196bfe88861?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" data-speed="0.8">
+  <div class="content">
+    <h2>Another Parallax Section</h2>
+    <p>This is another parallax section with a different background image and parallax speed.</p>
+    <p>Experiment with different images and speeds to achieve the desired visual effect.</p>
+  </div>
+</div>
+
+<div class="parallax-section" style="background-image: url('https://plus.unsplash.com/premium_photo-1708566712193-d7cef7c794c6?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" data-speed="0.3">
+  <div class="content">
+    <h2>One More Parallax Section</h2>
+    <p>Adding more parallax sections allows you to create a dynamic and engaging scrolling experience.</p>
+    <p>Combine text, images, and other elements to tell your story effectively.</p>
+  </div>
+</div>
+
+<script>
+  // Parallax effect
+  window.addEventListener('scroll', function() {
+    const parallaxSections = document.querySelectorAll('.parallax-section');
+    parallaxSections.forEach(section => {
+      const scrolled = window.scrollY;
+      const speed = section.getAttribute('data-speed');
+      section.style.backgroundPositionY = -(scrolled * speed) + 'px';
+    });
+  });
+</script>
+
+</body>
+</html>
